@@ -15,7 +15,7 @@ const port = 3000 // กำหนด port
 app.use(morgan('combined'))
 
 app.get("/", (req, res) => {
-    res.send("Hello Yuyu")
+    res.send("Hello Yuyu!")
 })
 
 app.listen(port, () => {
