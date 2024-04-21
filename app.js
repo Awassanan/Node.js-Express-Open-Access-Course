@@ -16,16 +16,16 @@ const debug = createDebug('app')
 // const path = require('path')
 
 const app = express() // เรียกใช้งาน express
-const port = 3000 // กำหนด port
+const PORT = process.env.PORT || 4000; // กำหนด port
 
 app.use(morgan('combined'))
 app.use(express.static(path.join(__dirname, "/public/")))
 
 app.get("/", (req, res) => {
-    res.send("Hello Yuyu!")
+    res.send("Hello Yuyu1111!")
 })
 
-app.listen(port, () => {
+app.listen(PORT, () => {
     // console.log("Listening on port " + chalk.green(port))
-    debug("Listening on port " + chalk.green(port))
+    debug("Listening on port" + chalk.green(" :",PORT))
 })
