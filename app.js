@@ -21,8 +21,12 @@ const PORT = process.env.PORT || 4000; // กำหนด port
 app.use(morgan('combined'))
 app.use(express.static(path.join(__dirname, "/public/")))
 
+app.set("views","./src/views");
+app.set("view engine","ejs")
+
 app.get("/", (req, res) => {
-    res.send("Hello Yuyu1111!")
+    // res.send("Hello Yuyu1111!")
+    res.render("index", {username: 'Miab', customers:['Kitti111','Kittikorn','Kitty']});
 })
 
 app.listen(PORT, () => {
