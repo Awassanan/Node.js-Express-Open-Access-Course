@@ -26,13 +26,29 @@ app.use(express.static(path.join(__dirname, "/public/")))
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
+// productRouter.route("/").get((req, res) => {
+//     // res.send("Hello World !!, I'm Product")
+//     res.render("products")
+// })
+
 productRouter.route("/").get((req, res) => {
-    res.send("Hello World !!, I'm Product")
-})
+    // res.send("Hello World !!, I'm Product")
+    res.render("products", {
+        products: [
+            { title: "ซันไลต์ถนอมมือ", description: "คลีน แอนด์ แคร์", price: 50 },
+            { title: "ไลปอนเอฟมะกรูด", description: "800 มล.กลิ่นมะกรูด แพ็คคู่", price: 69 },
+            { title: "ไลปอนเอฟส้ม", description: "800 มล.กลิ่นเจแปนนีส ยูซุ แพ็คคู่", price: 69 },
+            { title: "ทีโพลเพียว", description: "หอม สะอาด จานวิ้ง ๆ", price: 45 },
+        ]
+    });
+});
+
 
 productRouter.route("/1").get((req, res) => {
     res.send("Hello World !!, I'm Product 1")
 })
+
+
 app.use("/products", productRouter)
 // app.get("/products")
 
