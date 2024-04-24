@@ -2,6 +2,7 @@ import express from 'express'
 import chalk from 'chalk'
 import morgan from 'morgan'
 import path from 'path'
+import products from './data/products.json' with { type: 'json' };
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,16 +32,21 @@ app.set("view engine", "ejs");
 //     res.render("products")
 // })
 
+// productRouter.route("/").get((req, res) => {
+//     res.render("products", {
+//         products: [
+//             { title: "ซันไลต์ถนอมมือ", description: "คลีน แอนด์ แคร์", price: 50 },
+//             { title: "ไลปอนเอฟมะกรูด", description: "800 มล.กลิ่นมะกรูด แพ็คคู่", price: 69 },
+//             { title: "ไลปอนเอฟส้ม", description: "800 มล.กลิ่นเจแปนนีส ยูซุ แพ็คคู่", price: 69 },
+//             { title: "ทีโพลเพียว", description: "หอม สะอาด จานวิ้ง ๆ", price: 45 },
+//         ]
+//     });
+// });
+
 productRouter.route("/").get((req, res) => {
-    // res.send("Hello World !!, I'm Product")
-    res.render("products", {
-        products: [
-            { title: "ซันไลต์ถนอมมือ", description: "คลีน แอนด์ แคร์", price: 50 },
-            { title: "ไลปอนเอฟมะกรูด", description: "800 มล.กลิ่นมะกรูด แพ็คคู่", price: 69 },
-            { title: "ไลปอนเอฟส้ม", description: "800 มล.กลิ่นเจแปนนีส ยูซุ แพ็คคู่", price: 69 },
-            { title: "ทีโพลเพียว", description: "หอม สะอาด จานวิ้ง ๆ", price: 45 },
-        ]
-    });
+    res.render("products", 
+        products,
+    );
 });
 
 
