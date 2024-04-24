@@ -9,6 +9,8 @@ const __dirname = path.dirname(__filename);
 import createDebug from 'debug'
 const debug = createDebug('app')
 
+const productRouter = express.Router();
+
 // const express = require('express'); // import express
 // const chalk = require('chalk') // import chalk ที่ติดตั้งมา เวลาเรียกใช้งาน ใช้ใน console.log
 // const debug = require('debug')('app');
@@ -21,15 +23,25 @@ const PORT = process.env.PORT || 4000; // กำหนด port
 app.use(morgan('combined'))
 app.use(express.static(path.join(__dirname, "/public/")))
 
-app.set("views","./src/views");
-app.set("view engine","ejs")
+app.set("views", "./src/views");
+app.set("view engine", "ejs");
+
+productRouter.route("/").get((req, res) => {
+    res.send("Hello World !!, I'm Product")
+})
+
+productRouter.route("/1").get((req, res) => {
+    res.send("Hello World !!, I'm Product 1")
+})
+app.use("/products", productRouter)
+// app.get("/products")
 
 app.get("/", (req, res) => {
     // res.send("Hello Yuyu1111!")
-    res.render("index", {username: 'Miab', customers:['Kitti111','Kittikorn','Kitty']});
+    res.render("index", { username: 'Miab', customers: ['Kitti111', 'Kittikorn', 'Kitty'] });
 })
 
 app.listen(PORT, () => {
     // console.log("Listening on port " + chalk.green(port))
-    debug("Listening on port" + chalk.green(" :",PORT))
+    debug("Listening on port" + chalk.green(" :", PORT))
 })
