@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url';
-import productsRouter from './src/router/productsRouter'
+import productsRouter from './src/router/productsRouter.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

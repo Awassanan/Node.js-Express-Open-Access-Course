@@ -42,4 +42,5 @@ productsRouter.route("/:id").get((req, res) => {
     })
 })
 
-module.exports = productsRouter
+// module.exports = productsRouter;
+export default productsRouter ;
