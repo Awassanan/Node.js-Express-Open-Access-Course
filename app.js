@@ -2,15 +2,13 @@ import express from 'express'
 import chalk from 'chalk'
 import morgan from 'morgan'
 import path from 'path'
-import products from './data/products.json' with { type: 'json' };
 import { fileURLToPath } from 'url';
+import productsRouter from './src/router/productsRouter'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import createDebug from 'debug'
 const debug = createDebug('app')
-
-const productRouter = express.Router();
 
 // const express = require('express'); // import express
 // const chalk = require('chalk') // import chalk ที่ติดตั้งมา เวลาเรียกใช้งาน ใช้ใน console.log
@@ -20,6 +18,7 @@ const productRouter = express.Router();
 
 const app = express() // เรียกใช้งาน express
 const PORT = process.env.PORT || 4000; // กำหนด port
+// const productsRouter = require("./src/router/productsRouter")
 
 app.use(morgan('combined'))
 app.use(express.static(path.join(__dirname, "/public/")))
@@ -27,48 +26,7 @@ app.use(express.static(path.join(__dirname, "/public/")))
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
-// productRouter.route("/").get((req, res) => {
-//     // res.send("Hello World !!, I'm Product")
-//     res.render("products")
-// })
-
-// productRouter.route("/").get((req, res) => {
-//     res.render("products", {
-//         products: [
-//             { title: "ซันไลต์ถนอมมือ", description: "คลีน แอนด์ แคร์", price: 50 },
-//             { title: "ไลปอนเอฟมะกรูด", description: "800 มล.กลิ่นมะกรูด แพ็คคู่", price: 69 },
-//             { title: "ไลปอนเอฟส้ม", description: "800 มล.กลิ่นเจแปนนีส ยูซุ แพ็คคู่", price: 69 },
-//             { title: "ทีโพลเพียว", description: "หอม สะอาด จานวิ้ง ๆ", price: 45 },
-//         ]
-//     });
-// });
-
-productRouter.route("/").get((req, res) => {
-    res.render("products", {
-        products
-    },
-    );
-});
-
-
-// productRouter.route("/1").get((req, res) => {
-//     res.send("Hello World !!, I'm Product 1")
-// })
-
-// productRouter.route("/:id").get((req, res) => {
-//     const id = req.params.id
-//     res.send("Hello World !!, I'm Product " + id)
-// })
-
-productRouter.route("/:id").get((req, res) => {
-    const id = req.params.id
-    res.render("product", {
-        product: products[id],
-    })
-})
-
-
-app.use("/products", productRouter)
+app.use("/products", productsRouter)
 // app.get("/products")
 
 app.get("/", (req, res) => {
